@@ -3,20 +3,29 @@ import { personalDB } from '../lib/database/index.js';
 import { getTheme } from '../Themes/themes.js';
 const theme = getTheme();
 
-// Shared defaults
-const DEFAULT_WELCOME = `
-*╭─〘 𝑾𝑬𝑳𝑪𝑶𝑴𝑬 〙─╮*
-│ Hey &mention 🎉
-│ Group: *&name*
-│ Members: *&size*
-╰─&pp`;
+const DEFAULT_GOODBYE = `🫀⃝⃪⃔⃕🫵🏻 &mention 🥺💔🌸
+*𓂋⃝⃟⃟⃝⃪⃔ Goodbye from!*  &name
+                 *❛❛ Feelings never fade 🦋 ❜❜*
+*Some memories stay forever… even when people don’t ✨🌸💙*
+             *This was a fun hangout group ⎯⃝🥹🍃💘*
+      *We shared laughs, late-night talks & moments 🦚🌻.*        
+                       *Don’t forget us ☝️🥹🍒🤌*
+                                  *~⎯͢⎯⃝💞 Come back again!~*
+*Your presence will be missed tonight 🫵🥹💖🦚*
+*Thanks for being with us ❤‍🩹🌺*
+*Members left:> &size  🫵🎀* &pp`;
 
-const DEFAULT_GOODBYE = `
-*╭─〘 𝑮𝑶𝑶𝑫𝑩𝒀𝑬 〙─╮*
-│ Bye &mention 👋
-│ From *&name*
-│ Remaining: *&size*
-╰─&pp`;
+const DEFAULT_WELCOME = "🫀⃝⃪⃔⃕🫵🏻 &mention 🥺❤️🌸\n" +
+  "*𓂋⃝⃟⃟⃝⃪⃔ Welcome to!*  &name\n" +
+  "                 *❛❛ Feelings never change 🦋 ❜❜*\n" +
+  "*Some moments may change… but our true feelings never do ✨🌸💙*\n" +
+  "             *This is a fun hangout group ⎯⃝🥹🍃💘*\n" +
+  "      *We enjoy late-night songs, Truth & Dare🦚🌻.*        \n" +
+  "                       *Don’t leave us ☝️🥹🍒🤌*\n" +
+  "                                  *~⎯͢⎯⃝💞 Welcome once again!~*\n" +
+  "*We’re ready to steal your sleep tonight 🫵🥹💖🦚*\n" +
+  "*Thanks for joining us ❤‍🩹🌺*\n" +
+  "*Members:> &size  🫵🎀* &pp";
 
 // ================= WELCOME =================
 Module({
@@ -35,8 +44,7 @@ Module({
 
   if (match.toLowerCase() === "get") {
     return await message.send(
-      `*Current Welcome Message:*\n${currentMsg || DEFAULT_WELCOME}\n\nStatus: ${
-        status === "true" ? "✅ ON" : "❌ OFF"
+      `*Current Welcome Message:*\n${currentMsg || DEFAULT_WELCOME}\n\nStatus: ${status === "true" ? "✅ ON" : "❌ OFF"
       }`
     );
   }
@@ -49,7 +57,29 @@ Module({
       "set",
       botNumber
     );
-    return await message.send(`✅ Welcome is now *${isOn ? "ON" : "OFF"}*`);
+    // return await message.send(`✅ Welcome is now *${isOn ? "ON" : "OFF"}*`);
+
+    return await message.send(
+      `✅ Welcome is now *${isOn ? "ON" : "OFF"}*\n` +
+      `> Please set your custom welcome message\n` +
+      `> Example:-\n\n` +
+      `.welcome 🫀⃝⃪⃔⃕🫵🏻 &mention 🥺❤️🌸\n` +
+      `*𓂋⃝⃟⃟⃝⃪⃔ Welcome to!*  &name\n` +
+      `                 *❛❛ Feelings never change 🦋 ❜❜*\n` +
+      `*Some moments may change… but our true feelings never do ✨🌸💙*\n` +
+      `             *This is a fun hangout group ⎯⃝🥹🍃💘*\n` +
+      `      *We enjoy late-night songs, Truth & Dare🦚🌻.*        \n` +
+      `                       *Don’t leave us ☝️🥹🍒🤌*\n` +
+      `                                  *~⎯͢⎯⃝💞 Welcome once again!~*\n` +
+      `*We’re ready to steal your sleep tonight 🫵🥹💖🦚*\n` +
+      `*Thanks for joining us ❤‍🩹🌺*\n` +
+      `*Members:> &size  🫵🎀*\n\n` +
+      `*_________________________________________________*\n` +
+      `&mention :- tag user\n` +
+      `&name :- group name\n` +
+      `&size :- group total user count\n` +
+      `&pp :- welcome with profile picture`
+    );
   }
 
   if (match.length) {
@@ -83,8 +113,7 @@ Module({
 
   if (match.toLowerCase() === "get") {
     return await message.send(
-      `*Current Goodbye Message:*\n${currentMsg || DEFAULT_GOODBYE}\n\nStatus: ${
-        status === "true" ? "✅ ON" : "❌ OFF"
+      `*Current Goodbye Message:*\n${currentMsg || DEFAULT_GOODBYE}\n\nStatus: ${status === "true" ? "✅ ON" : "❌ OFF"
       }`
     );
   }
@@ -97,20 +126,40 @@ Module({
       "set",
       botNumber
     );
-    return await message.send(`✅ Goodbye is now *${isOn ? "ON" : "OFF"}*`);
-  }
-
-  if (match.length) {
-    await personalDB(
-      ["exit"],
-      { content: { status, message: match } },
-      "set",
-      botNumber
+    return await message.send(
+      `✅ Goodbye is now *${isOn ? "ON" : "OFF"}*\n` +
+      `> Please set your custom goodbye message\n` +
+      `> Example:-\n\n` +
+      `.goodbye 🫀⃝⃪⃔⃕🫵🏻 &mention 🥺💔🌸\n` +
+      `*𓂋⃝⃟⃟⃝⃪⃔ Goodbye from!*  &name\n` +
+      `                 *❛❛ Feelings never fade 🦋 ❜❜*\n` +
+      `*Some memories stay forever… even when people don’t ✨🌸💙*\n` +
+      `             *This was a fun hangout group ⎯⃝🥹🍃💘*\n` +
+      `      *We shared laughs, late-night talks & moments 🦚🌻.*        \n` +
+      `                       *Don’t forget us ☝️🥹🍒🤌*\n` +
+      `                                  *~⎯͢⎯⃝💞 Come back again!~*\n` +
+      `*Your presence will be missed tonight 🫵🥹💖🦚*\n` +
+      `*Thanks for being with us ❤‍🩹🌺*\n` +
+      `*Members left:> &size  🫵🎀* &pp\n\n` +
+      `*_________________________________________________*\n` +
+      `&mention :- tag user\n` +
+      `&name :- group name\n` +
+      `&size :- group total user count\n` +
+      `&pp :- goodbye with profile picture`
     );
-    return await message.send("✅ Custom goodbye message saved!");
   }
 
-  return await message.send(
-    `*Usage:*\n.goodbye on/off/get\n.goodbye <message>\n\n*Supports:* &mention, &name, &size, &pp`
+if (match.length) {
+  await personalDB(
+    ["exit"],
+    { content: { status, message: match } },
+    "set",
+    botNumber
   );
+  return await message.send("✅ Custom goodbye message saved!");
+}
+
+return await message.send(
+  `*Usage:*\n.goodbye on/off/get\n.goodbye <message>\n\n*Supports:* &mention, &name, &size, &pp`
+);
 });

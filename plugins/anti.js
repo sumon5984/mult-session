@@ -72,7 +72,7 @@ async function handleViolationLinks(message, sender, settings, reason) {
     console.error("❌ Failed to delete message:", e?.message || e);
   }
 
-  const action = settings.action || "null";
+  const action = settings.action || "kick";
   const warns = settings.warns || {};
   const currentWarn = warns[sender] || 0;
   const maxWarn = typeof settings.warn_count === "number" ? settings.warn_count : parseInt(settings.warn_count) || 3;
