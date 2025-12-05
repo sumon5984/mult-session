@@ -2,11 +2,8 @@ import os from "os";
 import { Module, commands } from '../lib/plugins.js';
 import { getRandomPhoto } from './bin/menu_img.js';
 import config from '../config.js';
-import cache from '../lib/cache.js';
 
 const name = "X-kira ━ 𝐁𝕺𝐓";
-const MENU_CACHE_KEY = "menu:grouped_commands";
-const MENU_CACHE_TTL = 300; // 5 minutes
 
 const runtime = (secs) => {
   const pad = (s) => s.toString().padStart(2, "0");
@@ -29,26 +26,6 @@ function buildGroupedCommands() {
     }, {});
 }
 
-// Get grouped commands from cache or rebuild
-async function getGroupedCommands() {
-  try {
-    const cached = await cache.get(MENU_CACHE_KEY);
-    if (cached) {
-      return JSON.parse(cached);
-    }
-  } catch (e) {
-    // cache miss or error; rebuild
-  }
-
-  const grouped = buildGroupedCommands();
-  try {
-    await cache.set(MENU_CACHE_KEY, JSON.stringify(grouped), MENU_CACHE_TTL);
-  } catch (e) {
-    // ignore cache set errors
-  }
-  return grouped;
-}
-
 // Menu command
 Module({
   command: "menu",
@@ -65,8 +42,8 @@ Module({
       const totGB = (os.totalmem() / 1073741824).toFixed(2);
       const ram = `${usedGB} / ${totGB} GB`;
 
-      // Use cached grouped commands instead of rebuilding every time
-      const grouped = await getGroupedCommands();
+      // Build grouped commands
+      const grouped = buildGroupedCommands();
 
       const categories = Object.keys(grouped).sort();
       let _cmd_st = "";

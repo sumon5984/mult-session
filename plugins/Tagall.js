@@ -87,7 +87,7 @@ Module({
     for (const p of others) {
       tagText += `*│${getEmoji()} ᩧ𝆺ྀི𝅥* @${p.id.split("@")[0]}\n`;
     }
-    tagText += "*╰────────────❍*";
+    tagText += `*╰────────────❍*`;
     const mentions = participants.map((p) => p.id);
     await conn.sendMessage(
       from,
