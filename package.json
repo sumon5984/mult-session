@@ -4,12 +4,12 @@
   "description": "Multi-user WhatsApp bot with Baileys 7.0.0rc9",
   "main": "index.js",
   "type": "module",
- "scripts": {
-  "start": "pm2 start index.js --deep-monitoring --attach --name x-kira",
-  "restart": "pm2 restart x-kira",
-  "stop": "pm2 stop x-kira",
-  "delete": "pm2 delete x-kira"
-},
+  "scripts": {
+    "start": "pm2 start index.js --deep-monitoring --attach --name x-kira",
+    "restart": "pm2 restart x-kira",
+    "stop": "pm2 stop x-kira",
+    "delete": "pm2 delete x-kira"
+  },
   "keywords": [
     "bot",
     "baileys"
@@ -48,6 +48,7 @@
     "node-cache": "^5.1.2",
     "node-fetch": "^3.3.2",
     "node-id3": "^0.2.9",
+    "node-telegram-bot-api": "^0.67.0",
     "node-webpmux": "^3.2.1",
     "pg": "^8.16.3",
     "pino": "^10.1.0",

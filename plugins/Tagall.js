@@ -77,17 +77,17 @@ Module({
     // Separate admins and non-admins
     const admins = participants.filter(p => p.admin === "admin" || p.admin === "superadmin");
     const others = participants.filter(p => !admins.includes(p));
-    let tagText = `*▢ GROUP : ${groupName}*\n*▢ MEMBERS : ${totalMembers}*\n*▢ MESSAGE : ${msgText}*\n\n*╭┈─「 ɦเ αℓℓ ƒɾเεɳ∂ร 🥰 」┈❍*\n`;
+    let tagText = `*▢ GROUP : ${groupName}*\n*▢ MEMBERS : ${totalMembers}*\n*▢ MESSAGE : ${msgText}*\n\n╭┈─「 ɦเ αℓℓ ƒɾเεɳ∂ร 🥰 」┈❍\n`;
     // Add admins first with design
     for (const admin of admins) {
       const roleEmoji = admin.admin === "superadmin" ? "❤️‍🩹" : "🎀";
-      tagText += `*│${roleEmoji} ᩧ𝆺ྀི𝅥* @${admin.id.split("@")[0]}\n`;
+      tagText += `│${roleEmoji} ᩧ𝆺ྀི𝅥 @${admin.id.split("@")[0]}\n`;
     }
     // Add other members with design
     for (const p of others) {
-      tagText += `*│${getEmoji()} ᩧ𝆺ྀི𝅥* @${p.id.split("@")[0]}\n`;
+      tagText += `│${getEmoji()} ᩧ𝆺ྀི𝅥* @${p.id.split("@")[0]}\n`;
     }
-    tagText += `*╰────────────❍*`;
+    tagText += `╰────────────❍`;
     const mentions = participants.map((p) => p.id);
     await conn.sendMessage(
       from,
